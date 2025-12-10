@@ -1,0 +1,6 @@
+{
+  "name": "my-profile",
+  "version": "1.0.0",
+  "description": "Infrastructure for provisioning AWS Lambda via Terraform.",
+  "license": "MIT"
+}
