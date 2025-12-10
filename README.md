@@ -123,7 +123,7 @@ Configure GitHub as an OpenID Connect (OIDC) identity provider in AWS to allow G
 
 2. Edit `terraform.tfvars` with your certificate ARN:
    ```hcl
-   certificate_id = "arn:aws:acm:us-east-1:YOUR_ACCOUNT:certificate/YOUR_CERT_ID"
+   certificate_arn = "arn:aws:acm:us-east-1:YOUR_ACCOUNT:certificate/YOUR_CERT_ID"
    domain_name = "example.com"
    ```
 

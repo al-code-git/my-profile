@@ -16,7 +16,7 @@ variable "profile_subdomain" {
   description = "Profile subdomain (e.g., my-profile.example.com)"
 }
 
-variable "certificate_id" {
+variable "certificate_arn" {
   type        = string
   default     = ""
   description = "ACM certificate ARN for CloudFront. Set via environment variable TF_VAR_certificate_arn or terraform.tfvars. Certificate must be in us-east-1 for CloudFront."
