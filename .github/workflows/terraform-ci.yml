@@ -1,0 +1,121 @@
+
+env:
+  TERRAFORM_VERSION: 1.13.5
+
+name: Terraform Infrastructure
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Job to run'
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+          - deploy
+          - destroy
+
+jobs:
+  deploy:
+    name: Deploy Infrastructure and App
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'deploy')
+    environment: prod
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      TF_INPUT: "false"
+      TF_VAR_certificate_arn: ${{ secrets.TF_VAR_CERTIFICATE_ARN }}
+      TF_VAR_domain_name: ${{ vars.TF_VAR_DOMAIN_NAME }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          aws-region: us-east-1
+          audience: sts.amazonaws.com
+
+      - name: Mask AWS Account ID
+        run: |
+          echo "::add-mask::${{ secrets.AWS_ACCOUNT_ID }}"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Terraform init
+        working-directory: infrastructure
+        run: terraform init -input=false
+
+      - name: Terraform validate
+        working-directory: infrastructure
+        run: terraform validate
+
+      - name: Terraform apply
+        working-directory: infrastructure
+        run: terraform apply -auto-approve
+
+      - name: Get Terraform outputs
+        working-directory: infrastructure
+        id: tf_outputs
+        run: |
+          echo "s3_bucket_name=$(terraform output -raw s3_bucket_name)" >> $GITHUB_OUTPUT
+          echo "cloudfront_distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> $GITHUB_OUTPUT
+
+      - name: Sync app to S3
+        run: |
+          aws s3 sync ./app/src s3://${{ steps.tf_outputs.outputs.s3_bucket_name }}/ --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }} --paths "/*"
+
+  destroy:
+    name: Destroy Infrastructure
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'destroy'
+    environment: prod
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      TF_INPUT: "false"
+      TF_VAR_certificate_arn: ${{ secrets.TF_VAR_CERTIFICATE_ARN }}
+      TF_VAR_domain_name: ${{ vars.TF_VAR_DOMAIN_NAME }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          aws-region: us-east-1
+          audience: sts.amazonaws.com
+
+      - name: Mask AWS Account ID
+        run: |
+          echo "::add-mask::${{ secrets.AWS_ACCOUNT_ID }}"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Terraform init
+        working-directory: infrastructure
+        run: terraform init -input=false
+
+      - name: Terraform destroy
+        working-directory: infrastructure
+        run: terraform destroy -auto-approve

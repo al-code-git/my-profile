@@ -140,7 +140,7 @@ Configure these secrets and variables in GitHub:
 
 **Secrets** (Settings → Secrets → Actions):
 - `AWS_OIDC_ROLE_ARN` - IAM role ARN for GitHub OIDC authentication
-- `TF_VAR_CERTIFICATE_ID` - ACM certificate ARN (us-east-1)
+- `TF_VAR_CERTIFICATE_ARN` - ACM certificate ARN (us-east-1)
 - `AWS_ACCOUNT_ID` - Your AWS Account ID (used for masking in workflow logs)
 
 **Variables** (Settings → Variables → Actions):

@@ -101,7 +101,7 @@ resource "aws_cloudfront_distribution" "profile_distribution" {
     }
   }
 
-  # Use custom ACM certificate when provided via var.certificate_id (set with TF_VAR_certificate_id),
+  # Use custom ACM certificate when provided via var.certificate_id (set with TF_VAR_certificate_arn),
   # otherwise fall back to CloudFront default certificate.
   viewer_certificate {
     acm_certificate_arn            = var.certificate_id != "" ? var.certificate_id : null
