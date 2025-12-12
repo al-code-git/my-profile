@@ -1,6 +1,6 @@
 # S3 Bucket for Profile Website
 resource "aws_s3_bucket" "profile_bucket" {
-  bucket        = "${var.profile_subdomain}.${var.domain_name}"
+  bucket        = var.environment == "prod" ? "${var.profile_subdomain}.${var.domain_name}" : "${var.profile_subdomain}-${var.environment}.${var.domain_name}"
   force_destroy = true # Allow bucket to be destroyed even if not empty
 }
 
@@ -65,7 +65,7 @@ resource "aws_cloudfront_distribution" "profile_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = ["${var.profile_subdomain}.${var.domain_name}"]
+  aliases             = [var.environment == "prod" ? "${var.profile_subdomain}.${var.domain_name}" : "${var.profile_subdomain}-${var.environment}.${var.domain_name}"]
   price_class         = "PriceClass_100"
 
   default_cache_behavior {
