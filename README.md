@@ -6,8 +6,8 @@ A personal profile website hosted on AWS using S3, CloudFront, and Route53. Infr
 
 | Version | Branch | Status | Description |
 |---------|--------|--------|-------------|
-| **v1.0.0** | `main` | Stable | Single production environment |
-| **v1.1.0** | `develop` | In Progress | Dual environment setup (prod + dev) |
+| **v2.0.0** | `main` | Stable | Dual environment setup (prod + dev) |
+| **v2.1.0** | `develop` | In Progress | Next iteration under active development |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and YouTube videos.
 
@@ -24,10 +24,10 @@ See [CHANGELOG.md](CHANGELOG.md) for release notes and YouTube videos.
 
 This project supports two environments:
 
-| Environment | Branch | Domain | Auto-Deploy |
-|-------------|--------|--------|-------------|
-| **Production** | `main` | `my-profile.example.com` | ✅ On push to main |
-| **Development** | `develop` | `my-profile-dev.example.com` | ✅ On push to develop |
+| Environment | Branch | Domain | Deployment |
+|-------------|--------|--------|------------|
+| **Production** | `main` | `my-profile.example.com` | Manual (tags only) |
+| **Development** | `develop` | `my-profile-dev.example.com` | Auto on PR merge or Manual |
 
 Each environment has its own:
 - S3 bucket (named per environment)
@@ -219,39 +219,95 @@ This infrastructure uses **AWS Free Tier** services:
 
 ## Deployment
 
-The GitHub Actions workflow supports both automatic and manual deployments for both environments:
+### Deployment Strategy
 
-### Automatic Deployment
+**Production** - Manual, tag-based deployments only:
+- No automatic deployments
+- Requires explicit version tags (e.g., `v2.0.0`)
+- Provides audit trail and rollback capability
 
-**Production Environment**:
-- Push to `main` branch → automatically triggers `deploy-prod` job
-- Creates: `my-profile.example.com`
+**Development** - Automatic deployments:
+- Auto-deploys on push to `develop` branch
+- Can also trigger manually
 
-**Development Environment**:
-- Push to `develop` branch → automatically triggers `deploy-dev` job  
-- Creates: `my-profile-dev.example.com`
+### Production Deployment (Manual)
 
-Each deployment:
-1. Applies Terraform changes to infrastructure
-2. Syncs `app/src/` to S3
-3. Invalidates CloudFront cache
+**Prerequisites:**
+1. Merge changes to `main` branch
+2. Create and push a version tag:
+   ```bash
+   git checkout main
+   git pull
+   git tag v2.0.0
+   git push origin v2.0.0
+   ```
 
-### Manual Deployment Options
+**Deploy:**
+1. Go to **Actions** → **Terraform Infrastructure** → **Run workflow**
+2. Configure:
+   - **Branch**: Select any branch (workflow will checkout the tag)
+   - **Environment**: `prod`
+   - **Tag**: `v2.0.0` (required)
+   - **Job**: `deploy`
+3. Click **Run workflow**
 
-Go to **Actions** → **Terraform Infrastructure** → **Run workflow** to manually trigger:
+**What happens:**
+1. **Validates** tag exists in repository (fails fast if not found)
+2. Checks out the specific tag
+3. Applies Terraform changes to production infrastructure
+4. Syncs `app/src/` to production S3 bucket
+5. Invalidates CloudFront cache
+6. **Outputs deployment summary** with tag and destroy instructions
 
-#### Deploy Jobs
-- Select environment: **"prod"** or **"dev"**
-- Select job: **"deploy"**
-- Runs the same steps as automatic deployment
-- Useful for redeploying without pushing code changes
+**Notes**: 
+- If tag doesn't exist, workflow fails immediately with error listing available tags.
+- After deployment, view the workflow summary to see which tag was deployed and how to destroy it.
 
-#### Destroy Jobs
-- Select environment: **"prod"** or **"dev"**
-- Select job: **"destroy"**
-- Runs `terraform destroy` to tear down infrastructure for that environment
-- Deletes: S3 bucket (and all contents), CloudFront distribution, Route53 records
-- **⚠️ Warning**: This action is irreversible and will delete all infrastructure for the selected environment
+### Development Deployment
+
+**Automatic** - Via Pull Request to `develop`:
+```bash
+# Create feature branch
+git checkout -b feature/my-change
+# Make changes and commit
+git add .
+git commit -m "Add new feature"
+# Push feature branch
+git push origin feature/my-change
+```
+
+1. Create a Pull Request targeting `develop` branch
+2. Once PR is reviewed and merged, workflow automatically triggers `deploy-dev` job
+
+**Note**: Direct pushes to `develop` are blocked by branch protection rules. All changes must go through pull requests.
+
+**Manual** - Via GitHub Actions:
+1. Go to **Actions** → **Terraform Infrastructure** → **Run workflow**
+2. Configure:
+   - **Environment**: `dev`
+   - **Tag**: (leave empty)
+   - **Job**: `deploy`
+3. Click **Run workflow**
+
+### Destroy Infrastructure
+
+Go to **Actions** → **Terraform Infrastructure** → **Run workflow**:
+
+**Production:**
+- Set `Environment`: `prod`
+- Set `Tag`: version tag (e.g., `v2.0.0`)
+- Set `Job`: `destroy`
+
+**Development:**
+- Set `Environment`: `dev`
+- Set `Tag`: (leave empty)
+- Set `Job`: `destroy`
+
+**⚠️ Warning**: Destroy operations are irreversible. They will:
+- Run `terraform destroy` to tear down all infrastructure
+- Delete S3 bucket and all contents
+- Remove CloudFront distribution
+- Remove Route53 records
 
 **Note**: The S3 bucket has `force_destroy = true` enabled, which means the destroy operation will automatically delete all objects and versions in the bucket before removing it.
 

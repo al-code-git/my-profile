@@ -6,7 +6,7 @@ name: Terraform Infrastructure
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ develop ]
   workflow_dispatch:
     inputs:
       environment:
@@ -17,6 +17,11 @@ on:
         options:
           - prod
           - dev
+      tag:
+        description: 'Git tag to deploy (required for prod, e.g., v2.0.0)'
+        required: false
+        type: string
+        default: ''
       job:
         description: 'Job to run'
         required: true
@@ -27,13 +32,52 @@ on:
           - destroy
 
 jobs:
-  # PRODUCTION ENVIRONMENT (main branch)
+  # Validate tag for production deployments
+  validate-tag:
+    name: Validate Production Tag
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod'
+    outputs:
+      tag_valid: ${{ steps.check.outputs.valid }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate tag exists
+        id: check
+        run: |
+          TAG="${{ github.event.inputs.tag }}"
+          
+          if [ -z "$TAG" ]; then
+            echo "Error: Tag is required for production deployments"
+            echo "valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          # Check if tag exists
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag '$TAG' exists"
+            echo "valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "Error: Tag '$TAG' does not exist in repository"
+            echo "Available tags:"
+            git tag -l | tail -10
+            echo "valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+  # PRODUCTION ENVIRONMENT (manual tag deployments only)
   deploy-prod:
     name: Deploy to Production
     runs-on: ubuntu-latest
+    needs: [validate-tag]
     if: |
-      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'deploy' && github.ref == 'refs/heads/main')
+      github.event_name == 'workflow_dispatch' && 
+      github.event.inputs.environment == 'prod' && 
+      github.event.inputs.job == 'deploy' &&
+      needs.validate-tag.outputs.tag_valid == 'true'
     environment: prod
     permissions:
       id-token: write
@@ -46,6 +90,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
@@ -91,11 +137,22 @@ jobs:
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }} --paths "/*"
 
+      - name: Output deployed tag
+        run: |
+          echo "### Production Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Tag:** \`${{ github.event.inputs.tag }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** prod" >> $GITHUB_STEP_SUMMARY
+
   destroy-prod:
     name: Destroy Production Infrastructure
     runs-on: ubuntu-latest
+    needs: [validate-tag]
     if: |
-      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'destroy' && github.ref == 'refs/heads/main'
+      github.event_name == 'workflow_dispatch' && 
+      github.event.inputs.environment == 'prod' && 
+      github.event.inputs.job == 'destroy' &&
+      needs.validate-tag.outputs.tag_valid == 'true'
     environment: prod
     permissions:
       id-token: write
@@ -108,6 +165,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
@@ -140,7 +199,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       (github.event_name == 'push' && github.ref == 'refs/heads/develop') || 
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'deploy' && github.ref == 'refs/heads/develop')
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'deploy')
     environment: dev
     permissions:
       id-token: write
@@ -201,12 +260,19 @@ jobs:
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }} --paths "/*"
+      
+      - name: Output deployed tag
+        run: |
+          echo "### Production Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Tag:** \`${{ github.event.inputs.tag }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** prod" >> $GITHUB_STEP_SUMMARY
 
   destroy-dev:
     name: Destroy Development Infrastructure
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'destroy' && github.ref == 'refs/heads/develop'
+      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'destroy'
     environment: dev
     permissions:
       id-token: write
