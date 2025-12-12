@@ -93,8 +93,8 @@
         "iam:ListInstanceProfilesForRole"
       ],
       "Resource": [
-        "arn:aws:iam::*:role/cloudfront-s3-access-role",
-        "arn:aws:iam::*:policy/s3-bucket-access-policy"
+        "arn:aws:iam::*:role/cloudfront-s3-access-role*",
+        "arn:aws:iam::*:policy/s3-bucket-access-policy*"
       ]
     },
     {
