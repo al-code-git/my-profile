@@ -138,6 +138,7 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }} --paths "/*"
 
       - name: Output deployed tag
+        if: ${{ github.event.inputs.tag != '' }}
         run: |
           echo "### Production Deployment Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -262,11 +263,12 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }} --paths "/*"
       
       - name: Output deployed tag
+        if: ${{ github.event.inputs.tag != '' }}
         run: |
-          echo "### Production Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "### Development Deployment Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Deployed Tag:** \`${{ github.event.inputs.tag }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** prod" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** dev" >> $GITHUB_STEP_SUMMARY
 
   destroy-dev:
     name: Destroy Development Infrastructure
