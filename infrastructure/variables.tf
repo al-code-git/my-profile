@@ -4,6 +4,12 @@ variable "aws_region" {
   description = "AWS region to deploy resources into"
 }
 
+variable "environment" {
+  type        = string
+  default     = "dev"
+  description = "Environment name (dev or prod)"
+}
+
 variable "domain_name" {
   type        = string
   default     = "example.com"
@@ -13,7 +19,7 @@ variable "domain_name" {
 variable "profile_subdomain" {
   type        = string
   default     = "my-profile"
-  description = "Profile subdomain (e.g., my-profile.example.com)"
+  description = "Profile subdomain (e.g., my-profile.example.com or my-profile-dev.example.com)"
 }
 
 variable "certificate_arn" {

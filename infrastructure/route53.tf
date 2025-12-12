@@ -7,7 +7,7 @@ data "aws_route53_zone" "main" {
 # A record for my-profile.example.com pointing to CloudFront
 resource "aws_route53_record" "profile" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${var.profile_subdomain}.${var.domain_name}"
+  name    = var.environment == "prod" ? "${var.profile_subdomain}.${var.domain_name}" : "${var.profile_subdomain}-${var.environment}.${var.domain_name}"
   type    = "A"
 
   alias {
@@ -20,7 +20,7 @@ resource "aws_route53_record" "profile" {
 # AAAA record (IPv6) for my-profile.example.com pointing to CloudFront
 resource "aws_route53_record" "profile_ipv6" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${var.profile_subdomain}.${var.domain_name}"
+  name    = var.environment == "prod" ? "${var.profile_subdomain}.${var.domain_name}" : "${var.profile_subdomain}-${var.environment}.${var.domain_name}"
   type    = "AAAA"
 
   alias {
