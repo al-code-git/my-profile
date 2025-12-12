@@ -1,5 +1,5 @@
 resource "aws_iam_role" "cloudfront_s3_role" {
-  name = "cloudfront-s3-access-role"
+  name = "cloudfront-s3-access-role-${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -14,7 +14,7 @@ resource "aws_iam_role" "cloudfront_s3_role" {
 }
 
 resource "aws_iam_policy" "s3_access_policy" {
-  name        = "s3-bucket-access-policy"
+  name        = "s3-bucket-access-policy-${var.environment}"
   description = "IAM policy for S3 bucket access"
 
   policy = jsonencode({

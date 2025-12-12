@@ -24,7 +24,7 @@ resource "aws_s3_bucket_public_access_block" "profile_bucket_pab" {
 
 # CloudFront Origin Access Control
 resource "aws_cloudfront_origin_access_control" "profile_oac" {
-  name                              = "profile-oac"
+  name                              = "profile-oac-${var.environment}"
   description                       = "OAC for profile S3 bucket"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
