@@ -16,10 +16,10 @@
         "s3:DeleteObjectVersion"
       ],
        "Resource": [
-        "arn:aws:s3:::my-profile.example.com", // change to your bucket name
-        "arn:aws:s3:::my-profile.example.com/*", // change to your bucket name
-        "arn:aws:s3:::example-terraform-backend", // change to your terraform backend bucket name
-        "arn:aws:s3:::example-terraform-backend/*" // change to your terraform backend bucket name
+        "arn:aws:s3:::my-profile*.al-code.com",     // all env buckets matching my-profile*.al-code.com (e.g., prod, dev, any other)
+        "arn:aws:s3:::my-profile*.al-code.com/*",  // objects in those buckets
+        "arn:aws:s3:::example-terraform-backend",   // terraform backend bucket
+        "arn:aws:s3:::example-terraform-backend/*"
       ]
     },
     {
