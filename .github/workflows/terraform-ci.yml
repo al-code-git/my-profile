@@ -225,53 +225,6 @@ jobs:
           echo "**Deployed Tag:** \`${{ github.event.inputs.tag }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** dev" >> $GITHUB_STEP_SUMMARY
 
-  destroy-dev:
-    name: Destroy Development Infrastructure
-    runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'destroy'
-    environment: dev
-    permissions:
-      id-token: write
-      contents: read
-    env:
-      TF_INPUT: "false"
-      TF_VAR_environment: dev
-      TF_VAR_certificate_arn: ${{ secrets.TF_VAR_CERTIFICATE_ARN }}
-      TF_VAR_domain_name: ${{ vars.TF_VAR_DOMAIN_NAME }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials (OIDC)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
-          aws-region: us-east-1
-          audience: sts.amazonaws.com
-
-      - name: Mask AWS Account ID
-        run: |
-          echo "::add-mask::${{ secrets.AWS_ACCOUNT_ID }}"
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-          terraform_wrapper: false
-
-      - name: Terraform init
-        working-directory: infrastructure
-        run: terraform init -input=false
-
-      - name: Select Terraform workspace (dev)
-        working-directory: infrastructure
-        run: terraform workspace select dev || terraform workspace new dev
-
-      - name: Terraform destroy
-        working-directory: infrastructure
-        run: terraform destroy -auto-approve
-
   # DEVELOPMENT ENVIRONMENT (develop branch)
   deploy-dev:
     name: Deploy to Development
