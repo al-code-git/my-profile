@@ -243,10 +243,9 @@ This infrastructure uses **AWS Free Tier** services:
    ```
 
 **Deploy:**
-1. Go to **Actions** → **Terraform Infrastructure** → **Run workflow**
+1. Go to **Actions** → **Production Infrastructure** → **Run workflow**
 2. Configure:
    - **Branch**: Select any branch (workflow will checkout the tag)
-   - **Environment**: `prod`
    - **Tag**: `v2.0.0` (required)
    - **Job**: `deploy`
 3. Click **Run workflow**
@@ -257,11 +256,12 @@ This infrastructure uses **AWS Free Tier** services:
 3. Applies Terraform changes to production infrastructure
 4. Syncs `app/src/` to production S3 bucket
 5. Invalidates CloudFront cache
-6. **Outputs deployment summary** with tag and destroy instructions
+6. **Outputs deployment summary** with tag info
 
 **Notes**: 
-- If tag doesn't exist, workflow fails immediately with error listing available tags.
-- After deployment, view the workflow summary to see which tag was deployed and how to destroy it.
+- If tag doesn't exist, workflow fails immediately with error listing available tags
+- After deployment, view the workflow summary to see which tag was deployed
+- Only production-related jobs are shown (no skipped dev jobs)
 
 ### Development Deployment
 
@@ -277,31 +277,35 @@ git push origin feature/my-change
 ```
 
 1. Create a Pull Request targeting `develop` branch
-2. Once PR is reviewed and merged, workflow automatically triggers `deploy-dev` job
+2. Once PR is reviewed and merged, workflow automatically triggers deployment
 
 **Note**: Direct pushes to `develop` are blocked by branch protection rules. All changes must go through pull requests.
 
 **Manual** - Via GitHub Actions:
-1. Go to **Actions** → **Terraform Infrastructure** → **Run workflow**
+1. Go to **Actions** → **Development Infrastructure** → **Run workflow**
 2. Configure:
-   - **Environment**: `dev`
-   - **Tag**: (leave empty)
+   - **Tag**: (optional, leave empty to use develop branch)
    - **Job**: `deploy`
 3. Click **Run workflow**
 
+**Benefits of split workflows:**
+- Only shows development-related jobs (no skipped prod jobs)
+- Cleaner, simpler interface
+- No environment selection needed
+
 ### Destroy Infrastructure
 
-Go to **Actions** → **Terraform Infrastructure** → **Run workflow**:
-
 **Production:**
-- Set `Environment`: `prod`
-- Set `Tag`: version tag (e.g., `v2.0.0`)
-- Set `Job`: `destroy`
+1. Go to **Actions** → **Production Infrastructure** → **Run workflow**
+2. Configure:
+   - **Tag**: version tag (e.g., `v2.0.0`)
+   - **Job**: `destroy`
 
 **Development:**
-- Set `Environment`: `dev`
-- Set `Tag`: (leave empty)
-- Set `Job`: `destroy`
+1. Go to **Actions** → **Development Infrastructure** → **Run workflow**
+2. Configure:
+   - **Tag**: (optional, leave empty)
+   - **Job**: `destroy`
 
 **⚠️ Warning**: Destroy operations are irreversible. They will:
 - Run `terraform destroy` to tear down all infrastructure
@@ -317,7 +321,8 @@ Go to **Actions** → **Terraform Infrastructure** → **Run workflow**:
 my-profile/
 ├── .github/
 │   └── workflows/
-│       └── terraform-ci.yml      # CI/CD pipeline
+│       ├── terraform-prod.yml    # Production workflow
+│       └── terraform-dev.yml     # Development workflow
 ├── app/
 │   └── src/
 │       └── index.html            # Website content
