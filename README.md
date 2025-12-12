@@ -2,6 +2,15 @@
 
 A personal profile website hosted on AWS using S3, CloudFront, and Route53. Infrastructure managed with Terraform and deployed via GitHub Actions.
 
+## Current Version
+
+| Version | Branch | Status | Description |
+|---------|--------|--------|-------------|
+| **v1.0.0** | `main` | Stable | Single production environment |
+| **v1.1.0** | `develop` | In Progress | Dual environment setup (prod + dev) |
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes and YouTube videos.
+
 ## Architecture
 
 - **S3** - Static website hosting
