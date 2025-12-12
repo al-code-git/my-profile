@@ -31,7 +31,9 @@ jobs:
   deploy-prod:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'deploy')
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'deploy' && github.ref == 'refs/heads/main')
     environment: prod
     permissions:
       id-token: write
@@ -92,7 +94,8 @@ jobs:
   destroy-prod:
     name: Destroy Production Infrastructure
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'destroy'
+    if: |
+      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod' && github.event.inputs.job == 'destroy' && github.ref == 'refs/heads/main'
     environment: prod
     permissions:
       id-token: write
@@ -135,7 +138,9 @@ jobs:
   deploy-dev:
     name: Deploy to Development
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/develop') || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'deploy')
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/develop') || 
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'deploy' && github.ref == 'refs/heads/develop')
     environment: dev
     permissions:
       id-token: write
@@ -169,6 +174,10 @@ jobs:
       - name: Terraform init
         working-directory: infrastructure
         run: terraform init -input=false
+
+      - name: Select Terraform workspace (dev)
+        working-directory: infrastructure
+        run: terraform workspace select dev || terraform workspace new dev
 
       - name: Terraform validate
         working-directory: infrastructure
@@ -196,7 +205,8 @@ jobs:
   destroy-dev:
     name: Destroy Development Infrastructure
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'destroy'
+    if: |
+      github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && github.event.inputs.job == 'destroy' && github.ref == 'refs/heads/develop'
     environment: dev
     permissions:
       id-token: write
@@ -230,6 +240,10 @@ jobs:
       - name: Terraform init
         working-directory: infrastructure
         run: terraform init -input=false
+
+      - name: Select Terraform workspace (dev)
+        working-directory: infrastructure
+        run: terraform workspace select dev || terraform workspace new dev
 
       - name: Terraform destroy
         working-directory: infrastructure

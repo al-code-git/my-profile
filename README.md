@@ -9,6 +9,22 @@ A personal profile website hosted on AWS using S3, CloudFront, and Route53. Infr
 - **Route53** - DNS management with A and AAAA records
 - **ACM** - SSL/TLS certificate (must be in us-east-1)
 - **GitHub Actions** - CI/CD pipeline for automatic deployment
+- **Environments** - Separate dev and prod environments
+
+## Environments
+
+This project supports two environments:
+
+| Environment | Branch | Domain | Auto-Deploy |
+|-------------|--------|--------|-------------|
+| **Production** | `main` | `my-profile.example.com` | ✅ On push to main |
+| **Development** | `develop` | `my-profile-dev.example.com` | ✅ On push to develop |
+
+Each environment has its own:
+- S3 bucket (named per environment)
+- CloudFront distribution
+- Route53 DNS records
+- Terraform state (in separate workspaces if needed)
 
 ## Prerequisites
 
@@ -28,14 +44,18 @@ aws s3api put-bucket-versioning \
 
 ### 2. ACM Certificate
 
-Create an SSL certificate in **us-east-1** (required for CloudFront):
+Create SSL certificates in **us-east-1** (required for CloudFront) for both environments:
 
 ```bash
+# Certificate for both prod and dev (using wildcard or multiple SANs)
 aws acm request-certificate \
   --domain-name my-profile.example.com \
+  --subject-alternative-names my-profile-dev.example.com \
   --validation-method DNS \
   --region us-east-1
 ```
+
+Alternatively, request separate certificates for each environment.
 
 Validate the certificate using DNS records in Route53 and wait until status is `ISSUED`.
 
@@ -146,7 +166,12 @@ Configure these secrets and variables in GitHub:
 **Variables** (Settings → Variables → Actions):
 - `TF_VAR_DOMAIN_NAME` - Your domain (e.g., `example.com`)
 
-The `profile_subdomain` defaults to `my-profile` (configured in `variables.tf`).
+**Environments** (Settings → Environments):
+Create two GitHub environments:
+- `prod` - For production deployments (can add required reviewers)
+- `dev` - For development deployments
+
+The `profile_subdomain` defaults to `my-profile` and the `environment` variable is automatically set by the workflow based on the branch.
 
 #### Security: AWS Account ID Masking
 
@@ -185,11 +210,19 @@ This infrastructure uses **AWS Free Tier** services:
 
 ## Deployment
 
-The GitHub Actions workflow supports both automatic and manual deployments:
+The GitHub Actions workflow supports both automatic and manual deployments for both environments:
 
 ### Automatic Deployment
 
-Push to `main` branch automatically triggers the **deploy** job which:
+**Production Environment**:
+- Push to `main` branch → automatically triggers `deploy-prod` job
+- Creates: `my-profile.example.com`
+
+**Development Environment**:
+- Push to `develop` branch → automatically triggers `deploy-dev` job  
+- Creates: `my-profile-dev.example.com`
+
+Each deployment:
 1. Applies Terraform changes to infrastructure
 2. Syncs `app/src/` to S3
 3. Invalidates CloudFront cache
@@ -198,16 +231,18 @@ Push to `main` branch automatically triggers the **deploy** job which:
 
 Go to **Actions** → **Terraform Infrastructure** → **Run workflow** to manually trigger:
 
-#### Deploy Job
-- Select **"deploy"** from the dropdown
+#### Deploy Jobs
+- Select environment: **"prod"** or **"dev"**
+- Select job: **"deploy"**
 - Runs the same steps as automatic deployment
 - Useful for redeploying without pushing code changes
 
-#### Destroy Job
-- Select **"destroy"** from the dropdown
-- Runs `terraform destroy` to tear down all infrastructure
-- Deletes: S3 bucket (and all contents), CloudFront distribution, Route53 records, IAM roles
-- **⚠️ Warning**: This action is irreversible and will delete all your infrastructure
+#### Destroy Jobs
+- Select environment: **"prod"** or **"dev"**
+- Select job: **"destroy"**
+- Runs `terraform destroy` to tear down infrastructure for that environment
+- Deletes: S3 bucket (and all contents), CloudFront distribution, Route53 records
+- **⚠️ Warning**: This action is irreversible and will delete all infrastructure for the selected environment
 
 **Note**: The S3 bucket has `force_destroy = true` enabled, which means the destroy operation will automatically delete all objects and versions in the bucket before removing it.
 
@@ -257,7 +292,7 @@ The GitHub Actions workflow uses an IAM role that trusts GitHub's OIDC provider.
 
 The minimum IAM policy grants only necessary permissions for:
 
-- **S3**: Create/manage specific buckets (`my-profile.example.com` and terraform backend)
+- **S3**: Create/manage specific buckets (`my-profile.example.com`, `my-profile-dev.example.com`, and terraform backend)
 - **CloudFront**: Create/update distributions, OAC, and cache invalidations
 - **Route53**: Manage DNS records in your hosted zone
 - **ACM**: Read certificate details (required for CloudFront)
@@ -269,11 +304,16 @@ The minimum IAM policy grants only necessary permissions for:
 
 ### Sync files to S3 manually:
 ```bash
+# Production
 aws s3 sync ./app/src s3://my-profile.example.com/ --delete
+
+# Development
+aws s3 sync ./app/src s3://my-profile-dev.example.com/ --delete
 ```
 
 ### Invalidate CloudFront cache:
 ```bash
+# Get distribution ID from terraform output first
 aws cloudfront create-invalidation \
   --distribution-id YOUR_DISTRIBUTION_ID \
   --paths "/*"
