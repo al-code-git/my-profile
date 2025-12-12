@@ -25,7 +25,7 @@ output "cloudfront_aliases" {
 
 output "website_url" {
   description = "Website URL"
-  value       = "https://${var.profile_subdomain}.${var.domain_name}"
+  value       = var.environment == "prod" ? "https://${var.profile_subdomain}.${var.domain_name}" : "https://${var.profile_subdomain}-${var.environment}.${var.domain_name}"
 }
 
 output "s3_sync_command" {
