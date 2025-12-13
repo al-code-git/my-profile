@@ -1,0 +1,17 @@
+name: Terraform Common
+
+on:
+  workflow_call:
+    outputs:
+      terraform_version:
+        description: Terraform version to use
+        value: ${{ jobs.export.outputs.terraform_version }}
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    outputs:
+      terraform_version: 1.13.5
+    steps:
+      - name: Export Terraform version
+        run: echo "Using Terraform 1.13.5"
