@@ -33,31 +33,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2025-12-12
 
 ### Changed
-- **Production deployments**: Changed to manual tag-based deployments only (no automatic push triggers).
-- **Development deployments**: Remains automatic on push to `develop` branch.
-- GitHub Actions: added `tag` input for selecting which git tag to deploy to production.
-- **Tag validation**: Added validation job that verifies tag exists before deployment starts.
-- **Deployment summary**: Workflow outputs deployed tag in summary for easy reference in destroy operations.
+- **Workflows split**: Separated into `terraform-prod.yml` and `terraform-dev.yml` for cleaner UI
+- **Production deployments**: Manual tag-based deployments only (no automatic push triggers)
+- **Development deployments**: Automatic on push to `develop` branch
+- **Tag validation**: Production workflow validates tag exists before deployment starts
+- **Deployment summary**: Workflow outputs deployed tag in summary for easy reference
 
 ### Added
-- Pre-deployment validation job that checks if specified tag exists in repository.
-- Helpful error messages showing available tags when validation fails.
-- Deployment summary with tag used, environment, and destroy instructions.
+- `terraform-prod.yml` - Production-only workflow (validate-tag, deploy, destroy)
+- `terraform-dev.yml` - Development-only workflow (deploy, destroy, auto-trigger)
+- Pre-deployment validation job that checks if specified tag exists in repository
+- Helpful error messages showing available tags when validation fails
+- Deployment summary with tag used and environment info
+
+### Removed
+- `terraform-ci.yml` - Replaced by separate prod/dev workflows
+
+### Benefits
+- **Cleaner UI**: Only shows relevant jobs for selected environment (no skipped jobs)
+- **Better organization**: Each environment has its own workflow file
+- **Simplified inputs**: Production requires tag, development doesn't
 
 ### Usage
 
 **Production (manual only)**:
-- Trigger via GitHub Actions → Terraform Infrastructure → Run workflow
-  - Set `Environment`: `prod`
+- Go to Actions → **Production Infrastructure** → Run workflow
   - Set `Tag`: version tag (e.g., `v2.0.0`) - **required**
   - Set `Job`: `deploy` or `destroy`
 - Workflow validates tag exists before deployment
-- After deployment, check workflow summary for tag and destroy instructions
+- After deployment, check workflow summary for tag info
 
 **Development (automatic)**:
 - Push to `develop` branch automatically deploys
-- Can also trigger manually with `Environment`: `dev`
-- Tag field not required for dev deployments
+- Or trigger manually: Actions → **Development Infrastructure** → Run workflow
+  - Set `Tag`: (optional, defaults to develop branch)
+  - Set `Job`: `deploy` or `destroy`
 
 ---
 
@@ -65,4 +75,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Description | Branch |
 |---------|--------------|-------------|--------|
-| 2.0.0   | 2025-12-12   | Tag triggers and manual ref selection for CI/CD | develop |
+| 2.0.0   | 2025-12-12   | Split workflows, tag-based prod deployments | develop |
