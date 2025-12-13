@@ -24,12 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Version History
-
-| Version | Release Date | Description | Branch |
-|---------|--------------|-------------|--------|
-| 1.0.0   | 2025-12-12   | Initial release with AWS infrastructure | main |
-
 ## [2.0.0] - 2025-12-12
 
 ### Changed
@@ -48,6 +42,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - `terraform-ci.yml` - Replaced by separate prod/dev workflows
+
+### Resources
+- **YouTube:** [Git Workflows for Multiple Developers and Environments](https://youtu.be/Rux2IxqZIy8)
+  - Managing multiple environments with Git workflows
+  - Separating production and development deployments
+  - Tag-based production releases and automated development deployments
 
 ### Benefits
 - **Cleaner UI**: Only shows relevant jobs for selected environment (no skipped jobs)
@@ -74,5 +74,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version History
 
 | Version | Release Date | Description | Branch |
-|---------|--------------|-------------|--------|
-| 2.0.0   | 2025-12-12   | Split workflows, tag-based prod deployments | develop |
+|---------|--------------|-------------|---------|
+| 2.0.0   | 2025-12-13   | Split workflows, tag-based prod deployments | main |
+| 1.0.0   | 2025-12-12   | Initial release with AWS infrastructure | main |
