@@ -3,25 +3,560 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World!</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #667eea;
-        }
-        h1 {
-            color: white;
-            font-size: 48px;
-        }
-    </style>
+    <title>My Profile</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello World! Welcome!</h1>
+    
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center d-flex align-items-center">
+        <div class="container">
+            <div class="profile-image rounded-circle border border-5 border-white shadow-lg mx-auto mb-4 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <h1 class="display-3 fw-bold mb-3">Marcos Lima</h1>
+            <p class="lead mb-3">Sr. Software Engineer | Full-Stack Developer</p>
+            <p class="mb-4"><i class="bi bi-geo-alt-fill me-2"></i>Itajaí, Santa Catarina, Brazil</p>
+            <div class="mb-4">
+                <a href="https://www.linkedin.com/in/marcos-b-lima" target="_blank" class="btn btn-light rounded-circle p-3 mx-2 shadow"><i class="bi bi-linkedin fs-5"></i></a>
+                <a href="mailto:mlima.engineer@gmail.com" class="btn btn-light rounded-circle p-3 mx-2 shadow"><i class="bi bi-envelope fs-5"></i></a>
+            </div>
+            <a href="#contact" class="btn btn-custom btn-lg rounded-pill px-4 text-white fw-semibold shadow">Get In Touch</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title fw-bold mb-4 position-relative d-inline-block">About Me</h2>
+                    <p class="lead mb-4">Creative and results-driven software engineer with a passion for building scalable solutions.</p>
+                    <p class="text-muted">I have a degree in Systems Analysis and Development with two postgraduate courses: Software Engineering and Mobile Development. I am Oracle Certified Professional Java SE 17 Developer and AWS Certified Developer Associate with years of experience in IT.</p>
+                    <p class="text-muted">Throughout my career, I have specialized in Java for the back-end, JavaScript, and TypeScript for the front-end. I'm a Full-Stack developer doing my best to write clean and maintainable code. Always ready for feedback, especially if it helps to make me better.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="card text-center p-4 border-0 shadow-sm h-100">
+                                <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                                    <i class="bi bi-trophy"></i>
+                                </div>
+                                <h3 class="h1 fw-bold text-primary mb-2">5</h3>
+                                <p class="text-muted mb-0 small">Certifications</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center p-4 border-0 shadow-sm h-100">
+                                <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <h3 class="h1 fw-bold text-primary mb-2">9</h3>
+                                <p class="text-muted mb-0 small">Companies</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center p-4 border-0 shadow-sm h-100">
+                                <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <h3 class="h1 fw-bold text-primary mb-2">12+</h3>
+                                <p class="text-muted mb-0 small">Years Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center p-4 border-0 shadow-sm h-100">
+                                <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                                    <i class="bi bi-translate"></i>
+                                </div>
+                                <h3 class="h1 fw-bold text-primary mb-2">2</h3>
+                                <p class="text-muted mb-0 small">Languages</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="py-5 my-5 bg-light">
+        <div class="container">
+            <h2 class="section-title fw-bold mb-5 position-relative d-inline-block mx-auto d-block text-center">My Skills</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card p-4 border-0 shadow-sm h-100">
+                        <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Frontend Development</h4>
+                        <div>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">JavaScript</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">TypeScript</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Angular</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">AngularJS</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">JSF</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Jest</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Jasmine</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4 border-0 shadow-sm h-100">
+                        <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                            <i class="bi bi-server"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Backend Development</h4>
+                        <div>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Java / J2EE</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Spring Boot</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">GraphQL</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">JUnit</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">SQL</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4 border-0 shadow-sm h-100">
+                        <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto mb-3">
+                            <i class="bi bi-tools"></i>
+                        </div>
+                        <h4 class="mb-3 fw-bold">Cloud & DevOps</h4>
+                        <div>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">AWS</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Google Cloud</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Terraform</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Kafka</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">RabbitMQ</span>
+                            <span class="skill-badge text-white rounded-pill px-3 py-2 d-inline-block m-1 small fw-semibold">Microservices</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title fw-bold mb-5 position-relative d-inline-block mx-auto d-block text-center">Professional Experience</h2>
+            
+            <!-- Newfire Global Partners -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-building text-primary fs-4 me-2"></i>
+                                <h5 class="fw-bold mb-0">Newfire Global Partners</h5>
+                            </div>
+                            <p class="text-muted small mb-1"><i class="bi bi-geo-alt me-1"></i>Cambridge, Massachusetts</p>
+                            <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Jan 2023 - Present (3 years)</p>
+                        </div>
+                        <div class="col-md-9">
+                            <h6 class="fw-bold text-primary mb-2">Technical Lead <span class="text-muted small">(March 2025 - Present)</span></h6>
+                            <h6 class="fw-bold text-primary mb-3">Senior Software Engineer <span class="text-muted small">(Jan 2023 - March 2025)</span></h6>
+                            <p class="mb-3">Optimize healthcare order management through the implementation of Event-Based Architecture (EBA) to ensure a secure and seamless experience. Key responsibilities include identifying crucial events, implementing microservices, and utilizing a reliable queuing system for efficient asynchronous communication.</p>
+                            <div>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">J2EE 21</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Spring</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">GraphQL</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Kafka</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">RabbitMQ</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Terraform</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CWI Software -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-building text-primary fs-4 me-2"></i>
+                                <h5 class="fw-bold mb-0">CWI Software</h5>
+                            </div>
+                            <p class="text-muted small mb-1"><i class="bi bi-geo-alt me-1"></i>Rio Grande do Sul, Brazil</p>
+                            <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Jan 2021 - Dec 2022 (2 years)</p>
+                        </div>
+                        <div class="col-md-9">
+                            <h6 class="fw-bold text-primary mb-3">Senior Software Engineer</h6>
+                            <p class="mb-3">Banking as a Service (BaaS), using microservices and cloud. The services are responsible for ensuring security and reliability between credit and debit card banking transactions. Responsible for developing new products, assisting team members with impediments, and proposing technologies that help create scalable and secure solutions.</p>
+                            <div>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Java 11</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Spring Boot</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Angular</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">RabbitMQ</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Google Cloud</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Redis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spread Tecnologia -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-building text-primary fs-4 me-2"></i>
+                                <h5 class="fw-bold mb-0">Spread Tecnologia</h5>
+                            </div>
+                            <p class="text-muted small mb-1"><i class="bi bi-geo-alt me-1"></i>Brasília, Brazil</p>
+                            <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Aug 2020 - Jan 2021 (6 months)</p>
+                        </div>
+                        <div class="col-md-9">
+                            <h6 class="fw-bold text-primary mb-3">Senior Software Engineer</h6>
+                            <p class="mb-3">Insurance and policyholder registration site allowing creation and binding of insurance to bank customers, issuance of reports, and other legal obligations. Responsible for maintaining legacy software, implementing evolutionary tasks, and applying new business rules.</p>
+                            <div>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Java 5</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Struts</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">JSP</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">DB2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Globalweb Corp -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-building text-primary fs-4 me-2"></i>
+                                <h5 class="fw-bold mb-0">Globalweb Corp</h5>
+                            </div>
+                            <p class="text-muted small mb-1"><i class="bi bi-geo-alt me-1"></i>Brasília, Brazil</p>
+                            <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Jul 2019 - Jul 2020 (1 year)</p>
+                        </div>
+                        <div class="col-md-9">
+                            <h6 class="fw-bold text-primary mb-3">Java Software Engineer</h6>
+                            <p class="mb-3">Website allowing classification and grouping of similar judicial processes to speed up the analysis and decisions of the judges of the Superior Court of Justice. Responsibilities included delivering front-end and back-end tasks, structuring architecture, and assisting the team during releases.</p>
+                            <div>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Java 11</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Spring</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">Angular</span>
+                                <span class="badge bg-secondary rounded-pill me-1 mb-1">MemSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earlier Experience Collapsed -->
+            <div class="text-center">
+                <button class="btn btn-outline-primary rounded-pill px-4" type="button" data-bs-toggle="collapse" data-bs-target="#moreExperience">
+                    <i class="bi bi-chevron-down me-2"></i>View Earlier Experience
+                </button>
+            </div>
+
+            <div class="collapse mt-4" id="moreExperience">
+                <!-- Stefanini Brasil -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="fw-bold"><i class="bi bi-building text-primary me-2"></i>Stefanini Brasil</h5>
+                                <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Mar 2019 - Jul 2019</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class="fw-bold text-primary mb-2">Java Developer</h6>
+                                <p class="mb-2">Banking system responsible for communication between Cobol batch and vendor registration website, cataloging transactions between bank customers and suppliers.</p>
+                                <div><span class="badge bg-secondary rounded-pill me-1 mb-1">Java 7</span><span class="badge bg-secondary rounded-pill me-1 mb-1">AngularJS</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exército Brasileiro -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="fw-bold"><i class="bi bi-building text-primary me-2"></i>Exército Brasileiro</h5>
+                                <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Mar 2017 - Feb 2019</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class="fw-bold text-primary mb-2">Java Developer</h6>
+                                <p class="mb-2">Evolutionary and corrective maintenance in nationwide system for Brazilian Army personnel records. Creation of reports and PL/SQL development.</p>
+                                <div><span class="badge bg-secondary rounded-pill me-1 mb-1">Java EE</span><span class="badge bg-secondary rounded-pill me-1 mb-1">JSF</span><span class="badge bg-secondary rounded-pill me-1 mb-1">JBoss Seam</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datainfo -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="fw-bold"><i class="bi bi-building text-primary me-2"></i>Datainfo Soluções em TI</h5>
+                                <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>May 2016 - Sep 2016</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class="fw-bold text-primary mb-2">Database Administrator</h6>
+                                <p class="mb-2">Data requirements analysis, creation and maintenance of data models, T-SQL and PLPGSQL development, data migration to Microsoft SQL Server.</p>
+                                <div><span class="badge bg-secondary rounded-pill me-1 mb-1">SQL Server</span><span class="badge bg-secondary rounded-pill me-1 mb-1">Pentaho</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nihon Telemática -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="fw-bold"><i class="bi bi-building text-primary me-2"></i>Nihon Telemática</h5>
+                                <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Apr 2013 - Oct 2015</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class="fw-bold text-primary mb-2">Technical Consultant | Data Analyst</h6>
+                                <p class="mb-2">Technical support in Commercial Automation, analytical dashboards development, Android application development, and SQL Server database management.</p>
+                                <div><span class="badge bg-secondary rounded-pill me-1 mb-1">Java EE</span><span class="badge bg-secondary rounded-pill me-1 mb-1">Android</span><span class="badge bg-secondary rounded-pill me-1 mb-1">SQL Server</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maqplan -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="fw-bold"><i class="bi bi-building text-primary me-2"></i>Maqplan Software</h5>
+                                <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Apr 2011 - Apr 2013</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class="fw-bold text-primary mb-2">Technical Consultant | Data Analyst</h6>
+                                <p class="mb-2">Technical support in Commercial Automation, database migration and maintenance, development of procedures, triggers and views, ETL routines, and Crystal Reports.</p>
+                                <div><span class="badge bg-secondary rounded-pill me-1 mb-1">SQL Server</span><span class="badge bg-secondary rounded-pill me-1 mb-1">Crystal Reports</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-5 my-5 bg-light">
+        <div class="container">
+            <h2 class="section-title fw-bold mb-5 position-relative d-inline-block mx-auto d-block text-center">Certifications</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-4 me-3 flex-shrink-0">
+                                <i class="bi bi-award"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Oracle Certified Professional</h5>
+                                <p class="text-muted mb-0">Java SE 17 Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-4 me-3 flex-shrink-0">
+                                <i class="bi bi-award"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">AWS Certified Developer</h5>
+                                <p class="text-muted mb-0">Associate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-4 me-3 flex-shrink-0">
+                                <i class="bi bi-award"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Oracle Certified Professional</h5>
+                                <p class="text-muted mb-0">Java SE 8 Programmer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-4 me-3 flex-shrink-0">
+                                <i class="bi bi-award"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Oracle Certified Associate</h5>
+                                <p class="text-muted mb-0">Java SE 8 Programmer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="icon-box text-white rounded-3 d-flex align-items-center justify-content-center fs-4 me-3 flex-shrink-0">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Secure Coding in Java</h5>
+                                <p class="text-muted mb-0">Security Certification</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Languages Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Education -->
+                <div class="col-lg-6">
+                    <h2 class="section-title fw-bold mb-4 position-relative d-inline-block">Education</h2>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-mortarboard-fill text-primary fs-3 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Postgraduate in Software Engineering</h5>
+                                    <p class="text-muted mb-1">Faculdade UnYLeYa</p>
+                                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i>2017 - 2018</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-mortarboard-fill text-primary fs-3 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Postgraduate in Mobile Development</h5>
+                                    <p class="text-muted mb-1">Universidade Estácio de Sá</p>
+                                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i>2017 - 2018</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-mortarboard-fill text-primary fs-3 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Systems Analysis and Development</h5>
+                                    <p class="text-muted mb-1">Universidade Católica de Brasília</p>
+                                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i>2012 - 2014</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="col-lg-6">
+                    <h2 class="section-title fw-bold mb-4 position-relative d-inline-block">Languages</h2>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-translate text-primary fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="fw-bold mb-0">English</h5>
+                                        <p class="text-muted mb-0">Full Professional Proficiency</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar" role="progressbar" style="width: 90%; background: var(--primary-gradient);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-translate text-primary fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="fw-bold mb-0">Português</h5>
+                                        <p class="text-muted mb-0">Native or Bilingual Proficiency</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar" role="progressbar" style="width: 100%; background: var(--primary-gradient);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 my-5 bg-light">
+        <div class="container">
+            <h2 class="section-title fw-bold mb-5 position-relative d-inline-block mx-auto d-block text-center">Get In Touch</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 p-md-5 border-0 shadow">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Name</label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Your Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Email</label>
+                                    <input type="email" class="form-control form-control-lg" placeholder="your@email.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Subject</label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Message</label>
+                                    <textarea class="form-control form-control-lg" rows="5" placeholder="Your message..."></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-custom btn-lg rounded-pill px-5 text-white fw-semibold shadow">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Marcos Lima. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
