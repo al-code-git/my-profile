@@ -11,12 +11,7 @@
     --accent: #4A7FA7;
     --white: #ffffff;
     --shadow: rgba(10, 25, 49, 0.15);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Navigation Header */
@@ -137,22 +132,20 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, var(--navy-lightest) 0%, var(--navy-light) 50%, var(--navy-medium) 100%);
     min-height: 100vh;
-    padding: 40px 20px 40px;
+    padding: 80px 1.25rem 2.5rem;
     color: var(--text-primary);
     scroll-behavior: smooth;
-    margin-top: 60px;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
 }
 
 /* Profile Card */
 .profile-card {
     background: var(--white);
-    border-radius: 30px;
-    padding: 60px 40px 40px;
+    border-radius: 1.875rem;
+    padding: 3.75rem 2.5rem 2.5rem;
     box-shadow: 0 20px 60px var(--shadow), 0 0 0 1px rgba(179, 207, 229, 0.2);
     position: relative;
     animation: fadeInUp 0.8s ease-out;
@@ -173,7 +166,7 @@ body {
 /* Profile Image */
 .profile-image-container {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 
 .profile-image {
@@ -183,7 +176,7 @@ body {
     object-fit: cover;
     border: 8px solid var(--navy-light);
     box-shadow: 0 10px 30px var(--shadow), 0 0 0 3px var(--navy-lightest);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-smooth);
 }
 
 .profile-image:hover {
@@ -194,21 +187,21 @@ body {
 /* Profile Info */
 .profile-info {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .profile-name {
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .profile-title {
     font-size: 1.3rem;
     color: var(--accent);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .profile-location {
@@ -217,13 +210,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 0.3125rem;
 }
 
 /* Profile Sections */
 .profile-section {
-    margin-bottom: 35px;
-    padding-bottom: 35px;
+    margin-bottom: 2.1875rem;
+    padding-bottom: 2.1875rem;
     border-bottom: 2px solid var(--navy-light);
 }
 
@@ -237,9 +230,9 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     position: relative;
-    padding-left: 20px;
+    padding-left: 1.25rem;
 }
 
 .section-title::before {
@@ -264,21 +257,21 @@ body {
 .skills-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 0.75rem;
 }
 
 .skill-badge {
     background: linear-gradient(135deg, var(--white), var(--navy-lightest));
     color: var(--text-primary);
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 0.625rem 1.25rem;
+    border-radius: 1.5625rem;
     font-size: 0.95rem;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-smooth);
     box-shadow: 0 4px 15px rgba(10, 25, 49, 0.12);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     border: 2px solid var(--navy-light);
 }
 
@@ -297,7 +290,7 @@ body {
 .contact-icons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
     flex-wrap: wrap;
 }
 
@@ -312,7 +305,7 @@ body {
     color: var(--white);
     font-size: 1.5rem;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
     box-shadow: 0 4px 15px rgba(10, 25, 49, 0.25);
 }
 
@@ -326,12 +319,12 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
-        padding: 20px 10px;
+        padding: 80px 0.625rem 1.875rem;
     }
     
     .profile-card {
-        padding: 40px 20px 30px;
-        border-radius: 20px;
+        padding: 2.5rem 1.25rem 1.875rem;
+        border-radius: 1.25rem;
     }
     
     .profile-name {
@@ -364,7 +357,7 @@ body {
     .profile-image {
         width: 120px;
         height: 120px;
-        border: 5px solid var(--blue-medium);
+        border: 5px solid var(--navy-medium);
     }
     
     .contact-link {
@@ -376,12 +369,12 @@ body {
 
 /* Experience Section */
 .experience-item {
-    margin-bottom: 30px;
-    padding: 20px;
+    margin-bottom: 1.875rem;
+    padding: 1.25rem;
     background: linear-gradient(135deg, var(--navy-lightest), rgba(179, 207, 229, 0.15));
-    border-radius: 12px;
+    border-radius: 0.75rem;
     border-left: 4px solid var(--navy-medium);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-smooth);
     position: relative;
 }
 
@@ -395,14 +388,14 @@ body {
 .promotion-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
     background: linear-gradient(135deg, var(--navy-medium), var(--navy-dark));
     color: var(--white);
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 0.375rem 0.875rem;
+    border-radius: 1.25rem;
     font-size: 0.75rem;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 4px 12px rgba(26, 61, 99, 0.3);
@@ -414,17 +407,17 @@ body {
 
 /* Promotion Timeline */
 .promotion-timeline {
-    margin: 20px 0;
-    padding: 15px;
+    margin: 1.25rem 0;
+    padding: 0.9375rem;
     background: var(--white);
-    border-radius: 8px;
+    border-radius: 0.5rem;
     border: 1px solid var(--navy-light);
 }
 
 .timeline-item {
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 0.9375rem;
+    margin-bottom: 0.9375rem;
     position: relative;
 }
 
@@ -484,9 +477,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 0.625rem;
 }
 
 .experience-company {
@@ -514,28 +507,28 @@ body {
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 12px 0;
+    margin: 0.75rem 0;
 }
 
 .experience-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
 }
 
 .tech-tag {
     background: var(--navy-lightest);
     color: var(--navy-dark);
-    padding: 6px 14px;
-    border-radius: 15px;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.9375rem;
     font-size: 0.8rem;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
     border: 1.5px solid var(--navy-light);
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
 }
 
 .tech-tag:hover {
@@ -556,12 +549,12 @@ body {
 }
 
 .certifications-list li {
-    padding: 12px 0;
+    padding: 0.75rem 0;
     font-size: 1rem;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.75rem;
 }
 
 .certifications-list li i {
@@ -573,17 +566,17 @@ body {
 .languages-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 0.9375rem;
 }
 
 .language-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
+    padding: 0.75rem 1.25rem;
     background: linear-gradient(135deg, var(--navy-lightest), var(--navy-light));
-    border-radius: 12px;
-    transition: transform 0.3s ease;
+    border-radius: 0.75rem;
+    transition: var(--transition-smooth);
     border: 1px solid var(--navy-light);
 }
 
