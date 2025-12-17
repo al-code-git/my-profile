@@ -648,6 +648,10 @@ body {
         --font-contact-icon: 1.875rem;
     }
     
+    body {
+        padding: 120px 1.25rem 2.5rem;
+    }
+    
     .skill-badge {
         padding: 0.75rem 1.5rem;
     }

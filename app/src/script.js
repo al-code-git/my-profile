@@ -1,3 +1,16 @@
+// Ensure page starts at top on load/refresh
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+});
+
 // Scroll to top function
 function scrollToTop(event) {
     event.preventDefault();
