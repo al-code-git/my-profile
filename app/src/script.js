@@ -107,18 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Contact link tooltips enhancement
-    const contactLinks = document.querySelectorAll('.contact-link');
-    
-    contactLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            const title = this.getAttribute('title');
-            if (title) {
-                console.log(`Opening: ${title}`);
-            }
-        });
-    });
-    
     // Profile image loading effect
     const profileImage = document.querySelector('.profile-image');
     
@@ -140,9 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     `;
-    document.head.appendChild(style);
-    
-    console.log('Profile page loaded successfully!');
+    document.head.appendChild(style);    
 });
 
 // Add smooth scrolling behavior
