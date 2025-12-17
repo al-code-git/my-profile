@@ -270,6 +270,13 @@ body {
     font-weight: 500;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.skill-badge i {
+    font-size: 1.2rem;
 }
 
 .skill-badge:hover {
@@ -428,6 +435,13 @@ body {
     border-radius: 15px;
     font-size: 0.8rem;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tech-tag i {
+    font-size: 1rem;
 }
 
 /* Certifications List */
