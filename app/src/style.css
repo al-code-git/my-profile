@@ -262,26 +262,28 @@ body {
 }
 
 .skill-badge {
-    background: linear-gradient(135deg, var(--blue-medium), var(--blue-dark));
-    color: var(--white);
+    background: var(--white);
+    color: var(--text-primary);
     padding: 10px 20px;
     border-radius: 25px;
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.15);
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    border: 2px solid var(--blue-light);
 }
 
 .skill-badge i {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .skill-badge:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    box-shadow: 0 6px 25px rgba(33, 150, 243, 0.3);
+    border-color: var(--blue-medium);
 }
 
 /* Contact Icons */
@@ -429,19 +431,26 @@ body {
 }
 
 .tech-tag {
-    background: var(--blue-accent);
-    color: var(--white);
-    padding: 5px 12px;
+    background: var(--white);
+    color: var(--text-primary);
+    padding: 6px 14px;
     border-radius: 15px;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    border: 1.5px solid var(--blue-light);
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    border-color: var(--blue-medium);
+    box-shadow: 0 2px 10px rgba(33, 150, 243, 0.2);
 }
 
 .tech-tag i {
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 /* Certifications List */
