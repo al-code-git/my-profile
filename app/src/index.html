@@ -3,25 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World!</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #667eea;
-        }
-        h1 {
-            color: white;
-            font-size: 48px;
-        }
-    </style>
+    <title>Marcos Lima - Profile</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello World! Welcome!</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <!-- Profile Image -->
+                    <div class="profile-image-container">
+                        <img src="assets/profile.png" alt="Marcos Lima" class="profile-image">
+                    </div>
+                    
+                    <!-- Profile Info -->
+                    <div class="profile-info">
+                        <h1 class="profile-name">Marcos Lima</h1>
+                        <p class="profile-title">Sr. Software Engineer | Full-Stack Developer</p>
+                        <p class="profile-location">
+                            <i class="bi bi-geo-alt-fill"></i> Itajaí, Santa Catarina, Brazil
+                        </p>
+                    </div>
+                    
+                    <!-- About Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="section-text">
+                            Creative and results-driven software engineer with a degree in Systems Analysis and Development 
+                            and two postgraduate courses: Software Engineering and Mobile Development. OCPJ8 certified with 
+                            years of experience in IT. Specialized in Java for back-end, JavaScript and TypeScript for front-end. 
+                            Full-Stack developer committed to writing clean and maintainable code. Always ready for feedback, 
+                            especially if it helps to make me better.
+                        </p>
+                    </div>
+                    
+                    <!-- Skills Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">Top Skills</h2>
+                        <div class="skills-container">
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">JavaScript</span>
+                            <span class="skill-badge">TypeScript</span>
+                            <span class="skill-badge">SQL</span>
+                            <span class="skill-badge">Spring Boot</span>
+                            <span class="skill-badge">Angular</span>
+                            <span class="skill-badge">AWS</span>
+                            <span class="skill-badge">Microservices</span>
+                            <span class="skill-badge">GraphQL</span>
+                            <span class="skill-badge">Apache Kafka</span>
+                            <span class="skill-badge">RabbitMQ</span>
+                            <span class="skill-badge">IT Solutions</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">Professional Experience</h2>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Newfire Global Partners</h3>
+                                    <p class="experience-title">Technical Lead</p>
+                                </div>
+                                <span class="experience-date">March 2025 - Present</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Newfire Global Partners</h3>
+                                    <p class="experience-title">Senior Software Engineer</p>
+                                </div>
+                                <span class="experience-date">Jan 2023 - Present</span>
+                            </div>
+                            <p class="experience-description">
+                                Optimize healthcare order management through Event-Based Architecture (EBA). Key responsibilities include 
+                                identifying crucial events, implementing microservices, and utilizing reliable queuing systems for efficient 
+                                asynchronous communication.
+                            </p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">J2EE 21</span>
+                                <span class="tech-tag">Spring</span>
+                                <span class="tech-tag">GraphQL</span>
+                                <span class="tech-tag">Apache Kafka</span>
+                                <span class="tech-tag">RabbitMQ</span>
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">Terraform</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">CWI Software</h3>
+                                    <p class="experience-title">Senior Software Engineer</p>
+                                </div>
+                                <span class="experience-date">Jan 2021 - Dec 2022</span>
+                            </div>
+                            <p class="experience-description">
+                                Banking as a Service (BaaS) using microservices and cloud. Responsible for developing new products, 
+                                assisting team members, and proposing technologies for scalable and secure solutions.
+                            </p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">Java 11</span>
+                                <span class="tech-tag">Spring Boot</span>
+                                <span class="tech-tag">Angular</span>
+                                <span class="tech-tag">RabbitMQ</span>
+                                <span class="tech-tag">Google Cloud</span>
+                                <span class="tech-tag">Microservices</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Spread Tecnologia</h3>
+                                    <p class="experience-title">Senior Software Engineer</p>
+                                </div>
+                                <span class="experience-date">Aug 2020 - Jan 2021</span>
+                            </div>
+                            <p class="experience-description">
+                                Insurance and policyholder registration platform. Responsible for legacy software maintenance, 
+                                evolutionary tasks, and implementing new business rules.
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Globalweb Corp</h3>
+                                    <p class="experience-title">Java Software Engineer</p>
+                                </div>
+                                <span class="experience-date">Jul 2019 - Jul 2020</span>
+                            </div>
+                            <p class="experience-description">
+                                Classification and grouping platform for judicial processes to expedite analysis and decisions. 
+                                Delivered front-end and back-end tasks, structured implementations, and assisted team during releases.
+                            </p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">Java 11</span>
+                                <span class="tech-tag">Spring</span>
+                                <span class="tech-tag">Angular</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Stefanini Brasil</h3>
+                                    <p class="experience-title">Java Developer</p>
+                                </div>
+                                <span class="experience-date">Mar 2019 - Jul 2019</span>
+                            </div>
+                            <p class="experience-description">
+                                Banking system for communication between Cobol batch and vendor registration website. 
+                                Developed front-end and back-end tasks.
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Exército Brasileiro</h3>
+                                    <p class="experience-title">Java Developer</p>
+                                </div>
+                                <span class="experience-date">Mar 2017 - Feb 2019</span>
+                            </div>
+                            <p class="experience-description">
+                                Evolving and corrective maintenance in a nationwide system for the Brazilian Army's personnel records. 
+                                Created reports with IReport and iText, developed PL/SQL scripts.
+                            </p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">Java EE</span>
+                                <span class="tech-tag">JSF</span>
+                                <span class="tech-tag">Hibernate</span>
+                                <span class="tech-tag">JBoss Seam</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Datainfo Soluções em TI</h3>
+                                    <p class="experience-title">Database Administrator</p>
+                                </div>
+                                <span class="experience-date">May 2016 - Sep 2016</span>
+                            </div>
+                            <p class="experience-description">
+                                Data modeling, migration to SQL Server databases, and data mining from legacy systems.
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Nihon Telemática</h3>
+                                    <p class="experience-title">Technical Consultant | Data Analyst</p>
+                                </div>
+                                <span class="experience-date">Apr 2013 - Oct 2015</span>
+                            </div>
+                            <p class="experience-description">
+                                Technical support in Commercial Automation, development of analytical dashboards, 
+                                Java EE and Android applications, and SQL Server database management.
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h3 class="experience-company">Maqplan Software e Automação Comercial</h3>
+                                    <p class="experience-title">Technical Consultant | Data Analyst</p>
+                                </div>
+                                <span class="experience-date">Apr 2011 - Apr 2013</span>
+                            </div>
+                            <p class="experience-description">
+                                Technical support in Commercial Automation, SQL Server database maintenance, 
+                                ETL routines, and report development with Crystal Reports.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Certifications Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">Certifications</h2>
+                        <ul class="certifications-list">
+                            <li><i class="bi bi-patch-check-fill"></i> Oracle Certified Professional, Java SE 17 Developer</li>
+                            <li><i class="bi bi-patch-check-fill"></i> Oracle Certified Professional, Java SE 8 Programmer</li>
+                            <li><i class="bi bi-patch-check-fill"></i> AWS Certified Developer – Associate</li>
+                            <li><i class="bi bi-patch-check-fill"></i> Oracle Certified Associate, Java SE 8 Programmer</li>
+                            <li><i class="bi bi-patch-check-fill"></i> Secure Coding in Java</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Languages Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">Languages</h2>
+                        <div class="languages-container">
+                            <div class="language-item">
+                                <span class="language-name">English</span>
+                                <span class="language-level">Full Professional</span>
+                            </div>
+                            <div class="language-item">
+                                <span class="language-name">Português</span>
+                                <span class="language-level">Native</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div class="profile-section">
+                        <h2 class="section-title">Get in Touch</h2>
+                        <div class="contact-icons">
+                            <a href="mailto:mlima.engineer@gmail.com" class="contact-link" title="Email">
+                                <i class="bi bi-envelope-fill"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/marcos-b-lima" class="contact-link" title="LinkedIn" target="_blank" rel="noopener">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
 </body>
 </html>
