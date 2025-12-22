@@ -6,8 +6,8 @@ A personal profile website hosted on AWS using S3, CloudFront, and Route53. Infr
 
 | Version | Branch | Status | Description |
 |---------|--------|--------|-------------|
-| **v2.0.0** | `main` | Stable | Dual environment setup (prod + dev) |
-| **v2.1.0** | `develop` | In Progress | Next iteration under active development |
+| **v3.0.0** | `main` | Stable | Enhanced features and improvements |
+| **v3.1.0** | `develop` | In Progress | Next iteration under active development |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and YouTube videos.
 
