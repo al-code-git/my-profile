@@ -7,12 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
-| Version | Release Date | Description | Branch |
-|---------|--------------|-------------|--------|
-| 3.1.0   | 2025-12-26   | SEO implementation & static site optimization | main |
-| 3.0.0   | 2025-12-22   | AI-powered profile layout redesign | main |
-| 2.0.0   | 2025-12-12   | Dual environment setup (prod + dev) | main |
-| 1.0.0   | 2025-12-12   | Initial release with AWS infrastructure | main |
+| Version | Release Date | Description | Branch | Tag |
+|---------|--------------|-------------|--------|-----|
+| 3.1.0   | 2025-12-26   | SEO implementation & static site optimization | main | v3.1.0 |
+| 3.0.0   | 2025-12-22   | AI-powered profile layout redesign | main | v3.0.0 |
+| 2.0.0   | 2025-12-12   | Dual environment setup (prod + dev) | main | v2.0.0 |
+| 1.0.0   | 2025-12-12   | Initial release with AWS infrastructure | main | v1.0.0 |
 
 ---
 
