@@ -9,9 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Description | Branch |
 |---------|--------------|-------------|--------|
+| 3.1.0   | 2025-12-26   | SEO implementation & static site optimization | main |
 | 3.0.0   | 2025-12-22   | AI-powered profile layout redesign | main |
 | 2.0.0   | 2025-12-12   | Dual environment setup (prod + dev) | main |
 | 1.0.0   | 2025-12-12   | Initial release with AWS infrastructure | main |
+
+---
+
+## [3.1.0] - 2025-12-26
+
+### Added
+- **SEO Implementation**: Comprehensive SEO optimization for portfolio discoverability
+- **Meta Tags**: Proper implementation of meta tags for search engine optimization
+- **Open Graph Integration**: Social media sharing optimization with Open Graph protocol
+- **JSON-LD Structured Data**: Schema markup for better search engine understanding
+- **Search Console Integration**: Setup and monitoring with Google Search Console
+
+### Why Static Over SPA
+- **SEO-Friendly**: Static HTML is inherently optimized for search engines
+- **Better Discoverability**: Crawlers can easily index all content
+- **Faster Initial Load**: Direct HTML delivery improves user experience
+- **Portfolio Perfect**: Ideal architecture choice for career visibility
+
+### Resources
+- **YouTube:** [SEO Implementation & Why I Chose Static Over SPA](https://youtu.be/LX-MRbHcCj0)
+  - Learn how to properly implement SEO on your portfolio
+  - SPA vs Static: The architectural choice that impacts rankings
+  - SEO implementations (meta tags, Open Graph, JSON-LD, structured data)
+  - Google Search Console setup and best practices
 
 ---
 

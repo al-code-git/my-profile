@@ -6,19 +6,22 @@ A personal profile website hosted on AWS using S3, CloudFront, and Route53. Infr
 
 | Version | Branch | Status | Description |
 |---------|--------|--------|-------------|
-| **v3.0.0** | `main` | Stable | Enhanced features and improvements |
-| **v3.1.0** | `develop` | In Progress | Next iteration under active development |
+| **v3.1.0** | `main` | Stable | SEO implementation & static site optimization |
+| **v3.2.0** | `develop` | Next | Internationalization |
+
+**Latest Features**: Complete SEO optimization with meta tags, Open Graph, JSON-LD structured data, and Google Search Console integration.
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and YouTube videos.
 
 ## Architecture
 
-- **S3** - Static website hosting
-- **CloudFront** - CDN with HTTPS and caching
+- **S3** - Static website hosting (SEO-friendly by default)
+- **CloudFront** - CDN with HTTPS and caching for optimal performance
 - **Route53** - DNS management with A and AAAA records
 - **ACM** - SSL/TLS certificate (must be in us-east-1)
 - **GitHub Actions** - CI/CD pipeline for automatic deployment
 - **Environments** - Separate dev and prod environments
+- **SEO** - Meta tags, Open Graph, JSON-LD structured data, and Search Console integration
 
 ## Environments
 
