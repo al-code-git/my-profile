@@ -37,7 +37,11 @@ function scrollToTop(event) {
 const languageSelector = document.getElementById('languageSelector');
 if (languageSelector) {
     languageSelector.addEventListener('change', function() {
-        window.location.href = this.value === 'pt' ? '/pt/' : '/';
+        if (this.value === 'pt') {
+            window.location.href = '/pt/index.html';
+        } else {
+            window.location.href = '/index.html';
+        }
     });
 }
 
