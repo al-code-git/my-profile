@@ -1,3 +1,19 @@
+# CloudFront Function to rewrite /pt to /pt/index.html
+resource "aws_cloudfront_function" "rewrite_pt_index" {
+  name    = "rewrite-pt-index-html"
+  runtime = "cloudfront-js-1.0"
+  comment = "Rewrite /pt to /pt/index.html for i18n support"
+  publish = true
+  code    = <<EOF
+function handler(event) {
+    var request = event.request;
+    if (request.uri === '/pt') {
+        request.uri = '/pt/index.html';
+    }
+    return request;
+}
+EOF
+}
 # S3 Bucket for Profile Website
 resource "aws_s3_bucket" "profile_bucket" {
   bucket        = var.environment == "prod" ? "${var.profile_subdomain}.${var.domain_name}" : "${var.profile_subdomain}-${var.environment}.${var.domain_name}"
@@ -56,6 +72,29 @@ resource "aws_s3_bucket_policy" "profile_bucket_policy" {
 
 # CloudFront Distribution
 resource "aws_cloudfront_distribution" "profile_distribution" {
+    ordered_cache_behavior {
+      path_pattern     = "/pt"
+      allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+      cached_methods   = ["GET", "HEAD"]
+      target_origin_id = "S3ProfileBucket"
+
+      forwarded_values {
+        query_string = false
+        cookies {
+          forward = "none"
+        }
+      }
+
+      viewer_protocol_policy = "redirect-to-https"
+      min_ttl                = 0
+      default_ttl            = 3600
+      max_ttl                = 86400
+
+      function_association {
+        event_type   = "viewer-request"
+        function_arn = aws_cloudfront_function.rewrite_pt_index.arn
+      }
+    }
   origin {
     domain_name            = aws_s3_bucket.profile_bucket.bucket_regional_domain_name
     origin_id              = "S3ProfileBucket"
