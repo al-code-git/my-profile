@@ -33,6 +33,15 @@ function scrollToTop(event) {
 
 // Profile Page Interactive Features
 
+// Language Selector
+const languageSelector = document.getElementById('languageSelector');
+if (languageSelector) {
+    languageSelector.addEventListener('change', function() {
+        window.location.href = this.value === 'pt' ? '/pt/' : '/';
+    });
+}
+
+
 // Set active navigation link and close mobile menu
 function setActive(event) {
     event.preventDefault();

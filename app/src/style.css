@@ -38,6 +38,11 @@
     --font-contact-icon: 1.5rem;
 }
 
+.language-selector {
+    width: auto; 
+    margin-top: 0.5rem;
+}
+
 /* Navigation Header */
 .navbar-custom {
     background: linear-gradient(90deg, rgba(25, 118, 210, 0.95), rgba(66, 165, 245, 0.95)) !important;
